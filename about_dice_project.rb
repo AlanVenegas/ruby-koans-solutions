@@ -6,6 +6,19 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #   code ...
 # end
 
+class DiceSet
+  attr_reader :values
+  def initialize
+    @values=[]
+  end
+  def roll(number_of_dices)
+    @values=[]
+    number_of_dices.times do 
+      @values << Random.rand(6) +1 
+    end
+  end
+
+end
 class AboutDiceProject < Neo::Koan
   def test_can_create_a_dice_set
     dice = DiceSet.new
@@ -36,10 +49,10 @@ class AboutDiceProject < Neo::Koan
 
     dice.roll(5)
     first_time = dice.values
-
+    
     dice.roll(5)
     second_time = dice.values
-
+    
     assert_not_equal first_time, second_time,
       "Two rolls should not be equal"
 
